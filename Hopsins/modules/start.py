@@ -26,18 +26,15 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 )
 async def start_(client: Client, message: Message):
     await message.reply_text(
-        f"""<b>┗┓ Hi {message.from_user.first_name}, I'm HOPSINS ┏┛\n
-I am Bot Music Group, the which can play songs in Voice Chat Group in an easy way
-I Have Many Practical Features Such as:
-┏━━━━━━━━━━━━━━
-┣ • Playing Music.
-┣ • Downloading Songs.
-┣ • Search Song you want to Play or Download.
-┗━━━━━━━━━━━━━━
-❃ Managed by : [SATAN](https://t.me/SA7ANI)
-━━━━━━━━━━━━━━━
+        f"""Hi {message.from_user.first_name}.\n
+[HOPSINS](https://t.me/HopsinsMusicBot) is a project designed for **play**,
+as simple as possible, **music** in your **groups**
+through the **voice chat** and download songs from **Youtube, Dezzer and Saavn**
+━━━━━━━━━━━━━━━━━━━━━━
+Hit /help to find more about how to use me to my full potential.
+━━━━━━━━━━━━━━━━━━━━━━
 Wanna Add me to your Group? Just click the button below!
-</b>""",
+""",
 
 # Edit What You Need to Change
 # But don't delete it. Thanks to. Yes: D
@@ -46,13 +43,16 @@ Wanna Add me to your Group? Just click the button below!
             [ 
                 [
                     InlineKeyboardButton(
-                        "📜 How to Use BOT 📜", url="https://telegra.ph/HOPSINS-Music-Bot-05-30")
+                        text="Add Me To Your Group!",
+                        url=f"http://t.me/HopsinsMusicBot?startgroup=new")
                   ],[
                     InlineKeyboardButton(
-                        "Group Support", url="https://t.me/TheKonoha11"
+                        text="Tutorial",
+                        url="https://telegra.ph/HOPSINS-Music-Bot-05-30"
                     ),
                     InlineKeyboardButton(
-                        "Coming Soon", url="https://t.me/HopsinsMusicBot"
+                        text="Group Support",
+                        url="https://t.me/TheKonoha11"
                     )
                 ]
             ]
@@ -89,7 +89,7 @@ async def start(client: Client, message: Message):
 )
 async def help(client: Client, message: Message):
     await message.reply_text(
-        """**Click the button below to see how to use the bot**""",
+        f"""**Click the button below to see how to use the bot**""",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
@@ -100,6 +100,50 @@ async def help(client: Client, message: Message):
             ]
         ),
     )  
+
+
+@Client.on_message(
+    filters.command("help")
+    & filters.private
+    & ~ filters.edited
+)
+async def help(client: Client, message: Message):
+    await message.reply_text(
+        f"""**Hello {message.from_user.first_name}! My name is HOPSINS!**\n\n
+**Commands for Groups, Group Members Can Also Use:**
+
+• `/playlist` - To Display the current Song playlist
+• `/current` - To Show the currently playing Song
+• `/song <song name>` : To download songs on YouTube
+• `/video <song name>` : To Download Videos on YouTube with details
+• `/vsong <song name>` : To Download Videos on YouTube with details
+• `/deezer <song name>` : To download songs from deezer
+• `/saavn <song name>` : To download songs from the saavn website
+• `/search <song name>` : For Searching Videos on YouTube with details
+
+**Command For Group Chat Admins Only:**
+• `/play <song name>` : To play the song you requested via YouTube
+• `/dplay <song name>`  : To play the song you requested via deezer
+• `/splay <song name>`  : To play the song you requested via jio saavn
+• `/pause` : To Pause Song playback
+• `/resume` : To continue playing the pause Song
+• `/skip` : To Skip the song playback to the next Song
+• `/end` : To Stop playing the Song
+• `/userbotjoin` : To Invite assistant to your chat
+• `/admincache` : To Refresh the admin list
+
+**NOTE: Videos or music that is longer than 1 hour cannot be played. Please remember don't add a lot of music to the queue at once to avoid unwanted errors. That's all the message from me! Happy Music.**
+""",
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "📜 How to Use BOT 📜", url="https://telegra.ph/HOPSINS-Music-Bot-05-30"
+                    )
+                ]
+            ]
+        ),
+    )
 
 
 @Client.on_message(
