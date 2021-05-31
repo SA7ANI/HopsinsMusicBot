@@ -1,8 +1,6 @@
-<h1 align="centre">🎵 BOT MUSIC MAN 🎵</h1>
+<h1 align="centre">🎵 Hopsins Music Bot 🎵</h1>
 
 ### A bot that can play music on telegram group's voice call
-#### BASED ON [CALLSMUSIC](https://github.com/callsmusic/callsmusic)
-# Available on telegram as @MusikManbot
 
 <h2> Whats new 🔥 </h2>
 
@@ -45,9 +43,9 @@
 
 ### Deploy To Heroku</h4>
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/mrismanaziz/Music-Man/tree/main)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/SA7ANI/HopsinsMusicBot/tree/master)
 
-get pyrogram string session [repl](https://repl.it/@mrismanaziz/stringenSession?lite=1&outputonly=1)
+Get pyrogram string session [repl](https://repl.it/@SA7ANI/StringSession?lite=1&outputonly=1)
 
 ### Credits
 #### Special Credits

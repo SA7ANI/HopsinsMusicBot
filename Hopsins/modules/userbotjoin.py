@@ -18,8 +18,8 @@
 from pyrogram import Client, filters
 from pyrogram.errors import UserAlreadyParticipant
 
-from MusicMan.helpers.decorators import authorized_users_only, errors
-from MusicMan.services.callsmusic.callsmusic import client as USER
+from Hopsins.helpers.decorators import authorized_users_only, errors
+from Hopsins.services.callsmusic.callsmusic import client as USER
 
 
 @Client.on_message(filters.command(["userbotjoin"]) & ~filters.private & ~filters.bot)
@@ -31,31 +31,31 @@ async def addchannel(client, message):
         invitelink = await client.export_chat_invite_link(chid)
     except:
         await message.reply_text(
-            "<b>Tambahkan saya sebagai admin grup Anda terlebih dahulu</b>",
+            "<b>Add me as your group admin first</b>",
         )
         return
 
     try:
         user = await USER.get_me()
     except:
-        user.first_name = "MusicMan"
+        user.first_name = "Hopsins"
 
     try:
         await USER.join_chat(invitelink)
-        await USER.send_message(message.chat.id, "Saya bergabung di sini seperti yang Anda minta")
+        await USER.send_message(message.chat.id, "I joined here as you requested")
     except UserAlreadyParticipant:
         await message.reply_text(
-            "<b>Assistant Bot sudah ada di obrolan Anda</b>",
+            "<b>Assistant Bot is already in your chat</b>",
         )
     except Exception as e:
         print(e)
         await message.reply_text(
-            f"<b>⛑ Flood Wait Error ⛑ \n{user.first_name} tidak dapat bergabung dengan grup Anda karena banyaknya permintaan bergabung untuk userbot! Pastikan pengguna tidak dibanned dalam grup."
-            "\n\nAtau tambahkan Assistant Bot secara manual ke Grup Anda dan coba lagi.</b>",
+            f"<b>⛑ Flood Wait Error ⛑ \n{user.first_name} cannot join your group due to the number of requests to join userbot! Make sure the user is not banned in the group."
+            "\n\nOr add Assistant Bot manually to your Groups and try again.</b>",
         )
         return
     await message.reply_text(
-        "<b>Helper userbot bergabung dengan obrolan Anda</b>",
+        "<b>Userbot helper joins your chat</b>",
         )
 
 
@@ -65,7 +65,7 @@ async def rem(USER, message):
         await USER.leave_chat(message.chat.id)
     except:
         await message.reply_text(
-            f"<b>Pengguna tidak dapat meninggalkan grup Anda! Mungkin menunggu floodwaits."
-            "\n\nAtau keluarkan saya secara manual dari ke Grup Anda</b>",
+            f"<b>Users cannot leave your group! Probably waiting for the floodwaits."
+            "\n\nOr manually remove me from your Groups</b>",
         )
         return

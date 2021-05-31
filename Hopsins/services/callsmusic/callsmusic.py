@@ -15,24 +15,24 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import requests
-from pyrogram import Client as Bot
+from pyrogram import Client
+from pytgcalls import PyTgCalls
 
-from MusicMan.config import API_HASH, API_ID, BG_IMAGE, BOT_TOKEN
-from MusicMan.services.callsmusic import run
+from Hopsins.config import API_HASH, API_ID, SESSION_NAME
+from Hopsins.services.callsmusic import queues
 
-response = requests.get(BG_IMAGE)
-file = open("./etc/foreground.png", "wb")
-file.write(response.content)
-file.close()
+client = Client(SESSION_NAME, API_ID, API_HASH)
+pytgcalls = PyTgCalls(client)
 
-bot = Bot(
-    ":memory:",
-    API_ID,
-    API_HASH,
-    bot_token=BOT_TOKEN,
-    plugins=dict(root="MusicMan.modules"),
-)
 
-bot.start()
-run()
+@pytgcalls.on_stream_end()
+def on_stream_end(chat_id: int) -> None:
+    queues.task_done(chat_id)
+
+    if queues.is_empty(chat_id):
+        pytgcalls.leave_group_call(chat_id)
+    else:
+        pytgcalls.change_stream(chat_id, queues.get(chat_id)["file"])
+
+
+run = pytgcalls.run

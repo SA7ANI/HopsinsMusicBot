@@ -35,7 +35,7 @@ from pyrogram.types import Message
 from youtube_search import YoutubeSearch
 from youtubesearchpython import SearchVideos
 
-from MusicMan.modules.play import arq
+from Hopsins.modules.play import arq
 
 
 @Client.on_message(filters.command("song") & ~filters.channel)
@@ -49,7 +49,7 @@ def song(client, message):
     for i in message.command[1:]:
         query += " " + str(i)
     print(query)
-    m = message.reply("🔎 **Sedang Mencari Lagu...**")
+    m = message.reply("🔎 **Searching for Songs...**")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = YoutubeSearch(query, max_results=1).to_dict()
@@ -66,16 +66,16 @@ def song(client, message):
         results[0]["views"]
 
     except Exception as e:
-        m.edit("❌ Lagu Tidak ditemukan.\n\nCoba Masukan Judul lagu yang lebih jelas.")
+        m.edit("❌ Song Not Found. \n\nTry Entering a Clearer Song Title.")
         print(str(e))
         return
-    m.edit("**Sedang Mendownload Lagu**")
+    m.edit("**Downloading Songs**")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = "**🎵 Uploaded by @mrismanaziz **"
+        rep = "**🎵 Uploaded by @SA7ANI **"
         secmul, dur, dur_arr = 1, 0, duration.split(":")
         for i in range(len(dur_arr) - 1, -1, -1):
             dur += int(dur_arr[i]) * secmul
@@ -267,17 +267,17 @@ def time_to_seconds(time):
 async def jssong(_, message):
     global is_downloading
     if len(message.command) < 2:
-        await message.reply_text("/saavn masukan judul lagu.")
+        await message.reply_text("/saavn input song title.")
         return
     if is_downloading:
         await message.reply_text(
-            "Downloadan yang lain sedang berlangsung, coba lagi nanti"
+            "Another download is in progress, please try again later"
         )
         return
     is_downloading = True
     text = message.text.split(None, 1)[1]
     query = text.replace(" ", "%20")
-    m = await message.reply_text("🔎 **Sedang Mencari Lagu...**")
+    m = await message.reply_text("🔎 **Searching for Songs...**")
     try:
         songs = await arq.saavn(query)
         if not songs.ok:
@@ -306,17 +306,17 @@ async def jssong(_, message):
 async def deezsong(_, message):
     global is_downloading
     if len(message.command) < 2:
-        await message.reply_text("/deezer masukan judul lagu")
+        await message.reply_text("/deezer input song title")
         return
     if is_downloading:
         await message.reply_text(
-            "Downloadan yang lain sedang berlangsung, coba lagi nanti"
+            "Another download is in progress, please try again later"
         )
         return
     is_downloading = True
     text = message.text.split(None, 1)[1]
     query = text.replace(" ", "%20")
-    m = await message.reply_text("🔎 **Sedang Mencari Lagu...**")
+    m = await message.reply_text("🔎 **Searching for Songs...**")
     try:
         songs = await arq.deezer(query, 1)
         if not songs.ok:
@@ -343,17 +343,17 @@ async def ytmusic(client, message: Message):
     global is_downloading
     if is_downloading:
         await message.reply_text(
-            "Downloadan yang lain sedang berlangsung, coba lagi nanti"
+            "Another download is in progress, please try again later"
         )
         return
 
     urlissed = get_text(message)
 
     pablo = await client.send_message(
-        message.chat.id, f"`Mendapatkan {urlissed} Dari Youtube. Tunggu Sebentar.`"
+        message.chat.id, f"`Got {urlissed} From Youtube. Wait a minute.`"
     )
     if not urlissed:
-        await pablo.edit("Sintaks Perintah Tidak Valid, Silakan ketik `/help` Untuk Mengetahui Lebih Lanjut!")
+        await pablo.edit("Invalid Command Syntax, Please type `/help` To Know More!")
         return
 
     search = SearchVideos(f"{urlissed}", offset=1, mode="dict", max_results=1)
@@ -387,7 +387,7 @@ async def ytmusic(client, message: Message):
 
             if duration > 8:
                 await pablo.edit(
-                    f"❌ Video berdurasi lebih dari 10 menit tidak diperbolehkan, video yang ingin kamu download {duration} minute(s)"
+                    f"❌ Videos longer than 10 minutes are not allowed, videos that you want to download {duration} minute(s)"
                 )
                 is_downloading = False
                 return

@@ -16,15 +16,15 @@
 
 
 from asyncio.queues import QueueEmpty
-from MusicMan.config import que
+from Hopsins.config import que
 from pyrogram import Client, filters
 from pyrogram.types import Message
 
-from MusicMan.function.admins import set
-from MusicMan.helpers.channelmusic import get_chat_id
-from MusicMan.helpers.decorators import authorized_users_only, errors
-from MusicMan.helpers.filters import command, other_filters
-from MusicMan.services.callsmusic import callsmusic
+from Hopsins.function.admins import set
+from Hopsins.helpers.channelmusic import get_chat_id
+from Hopsins.helpers.decorators import authorized_users_only, errors
+from Hopsins.helpers.filters import command, other_filters
+from Hopsins.services.callsmusic import callsmusic
 
 
 @Client.on_message(filters.command("adminreset"))
@@ -48,7 +48,7 @@ async def pause(_, message: Message):
     if (chat_id not in callsmusic.pytgcalls.active_calls) or (
         callsmusic.pytgcalls.active_calls[chat_id] == "paused"
     ):
-        await message.reply_text("❗ **Tidak ada Lagu yang sedang diputar!**")
+        await message.reply_text("❗ **No Song is currently playing!**")
     else:
         callsmusic.pytgcalls.pause_stream(chat_id)
         await message.reply_text("▶️ **Paused!**")
@@ -62,7 +62,7 @@ async def resume(_, message: Message):
     if (chat_id not in callsmusic.pytgcalls.active_calls) or (
         callsmusic.pytgcalls.active_calls[chat_id] == "playing"
     ):
-        await message.reply_text("❗ **Tidak ada Lagu yang sedang dijeda!**")
+        await message.reply_text("❗ **No Songs are currently paused!**")
     else:
         callsmusic.pytgcalls.resume_stream(chat_id)
         await message.reply_text("⏸ **Resumed!**")
@@ -74,7 +74,7 @@ async def resume(_, message: Message):
 async def stop(_, message: Message):
     chat_id = get_chat_id(message.chat)
     if chat_id not in callsmusic.pytgcalls.active_calls:
-        await message.reply_text("❗ **Tidak ada Lagu yang sedang diputar!**")
+        await message.reply_text("❗ **No Song is currently playing!**")
     else:
         try:
             callsmusic.queues.clear(chat_id)
@@ -82,7 +82,7 @@ async def stop(_, message: Message):
             pass
 
         callsmusic.pytgcalls.leave_group_call(chat_id)
-        await message.reply_text("❌ **Memberhentikan Lagu!**")
+        await message.reply_text("❌ **Stop the Song!**")
 
 
 @Client.on_message(command("skip") & other_filters)
@@ -92,7 +92,7 @@ async def skip(_, message: Message):
     global que
     chat_id = get_chat_id(message.chat)
     if chat_id not in callsmusic.pytgcalls.active_calls:
-        await message.reply_text("❗ **Tidak ada Lagu Selanjutnya untuk dilewati!**")
+        await message.reply_text("❗ **No Next Song to Skip!**")
     else:
         callsmusic.queues.task_done(chat_id)
 
@@ -103,7 +103,7 @@ async def skip(_, message: Message):
                 chat_id, callsmusic.queues.get(chat_id)["file"]
             )
 
-        await message.reply_text("⏩ **Melewati lagu saat ini!**")
+        await message.reply_text("⏩ **Skip the current song!**")
 
 
 @Client.on_message(filters.command("admincache"))
@@ -116,4 +116,4 @@ async def admincache(client, message: Message):
             for member in await message.chat.get_members(filter="administrators")
         ],
     )
-    await message.reply_text("✅️ **Daftar admin** telah **diperbarui**")
+    await message.reply_text("✅️ **The list of admins** has been **updated**")

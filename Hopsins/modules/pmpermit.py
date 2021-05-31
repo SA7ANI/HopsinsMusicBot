@@ -18,13 +18,13 @@
 from pyrogram import filters
 from pyrogram.types import Message
 
-from MusicMan.services.callsmusic.callsmusic import client as USER
+from Hopsins.services.callsmusic.callsmusic import client as USER
 
 
 @USER.on_message(filters.text & filters.private & ~filters.me & ~filters.bot)
 async def pmPermit(client: USER, message: Message):
     await USER.send_message(
         message.chat.id,
-        "Halo, Saya adalah **Layanan Asistant Music Man.**\n\n ❗️ **Rules:**\n   - Jangan Spam Pesan disini\n   - Jangan Spam Lagu Biar Ga Error\n   - Tutorial Cara Menggunakan bot Lihat di @Lunatic0de \n\n 👉 **KIRIM LINK INVITE ATAU USERNAME GRUP, JIKA ASSISTANT TIDAK DAPAT BERGABUNG DENGAN GRUP ANDA.**\n\n ⛑ **Group Support :** @SharingUserbot - **Owner** @mrismanaziz\n\n",
+        "Hello, I am **Hopsins Assistant Service.**\n\n ❗️ **Rules:**\n   - Don't Spam Order Here\n   - Do not spam songs to make it ga error\n   - Tutorial on how to use bots See [Click Here](https://telegra.ph/HOPSINS-Music-Bot-05-30) \n\n 👉 **SEND INVITE LINKS OR GROUP USERNAME, IF ASSISTANT CANNOT JOIN YOUR GROUP.**\n\n ⛑ **Group Support :** @SA7ANI\n\n",
     )
     return

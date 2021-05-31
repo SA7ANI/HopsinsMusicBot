@@ -15,26 +15,24 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from typing import List
+import requests
+from pyrogram import Client as Bot
 
-from pyrogram.types import Chat, User
+from Hopsins.config import API_HASH, API_ID, BG_IMAGE, BOT_TOKEN
+from Hopsins.services.callsmusic import run
 
-from MusicMan.function.admins import get as gett
-from MusicMan.function.admins import set
+response = requests.get(BG_IMAGE)
+file = open("./etc/foreground.png", "wb")
+file.write(response.content)
+file.close()
 
+bot = Bot(
+    ":memory:",
+    API_ID,
+    API_HASH,
+    bot_token=BOT_TOKEN,
+    plugins=dict(root="Hopsins.modules"),
+)
 
-async def get_administrators(chat: Chat) -> List[User]:
-    get = gett(chat.id)
-
-    if get:
-        return get
-    else:
-        administrators = await chat.get_members(filter="administrators")
-        to_set = []
-
-        for administrator in administrators:
-            # if administrator.can_manage_voice_chats:
-            to_set.append(administrator.user.id)
-
-        set(chat.id, to_set)
-        return await get_administrators(chat)
+bot.start()
+run()

@@ -15,24 +15,17 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from pyrogram import Client
-from pytgcalls import PyTgCalls
+from typing import List, Union
 
-from MusicMan.config import API_HASH, API_ID, SESSION_NAME
-from MusicMan.services.callsmusic import queues
+from pyrogram import filters
 
-client = Client(SESSION_NAME, API_ID, API_HASH)
-pytgcalls = PyTgCalls(client)
+from Hopsins.config import COMMAND_PREFIXES
 
-
-@pytgcalls.on_stream_end()
-def on_stream_end(chat_id: int) -> None:
-    queues.task_done(chat_id)
-
-    if queues.is_empty(chat_id):
-        pytgcalls.leave_group_call(chat_id)
-    else:
-        pytgcalls.change_stream(chat_id, queues.get(chat_id)["file"])
+other_filters = filters.group & ~filters.edited & ~filters.via_bot & ~filters.forwarded
+other_filters2 = (
+    filters.private & ~filters.edited & ~filters.via_bot & ~filters.forwarded
+)
 
 
-run = pytgcalls.run
+def command(commands: Union[str, List[str]]):
+    return filters.command(commands, COMMAND_PREFIXES)

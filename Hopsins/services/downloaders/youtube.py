@@ -20,8 +20,8 @@ from os import path
 
 from youtube_dl import YoutubeDL
 
-from MusicMan.config import DURATION_LIMIT
-from MusicMan.helpers.errors import DurationLimitError
+from Hopsins.config import DURATION_LIMIT
+from Hopsins.helpers.errors import DurationLimitError
 
 ydl_opts = {
     "format": "bestaudio[ext=m4a]",

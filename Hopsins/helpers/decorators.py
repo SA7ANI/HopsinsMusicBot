@@ -20,8 +20,8 @@ from typing import Callable
 from pyrogram import Client
 from pyrogram.types import Message
 
-from MusicMan.config import SUDO_USERS
-from MusicMan.helpers.admins import get_administrators
+from Hopsins.config import SUDO_USERS
+from Hopsins.helpers.admins import get_administrators
 
 
 def errors(func: Callable) -> Callable:
