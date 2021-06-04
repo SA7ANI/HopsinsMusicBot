@@ -35,7 +35,7 @@
     "PROJECT_NAME": {
       "description": "The name of your MusicPlayer project.",
       "required": false,
-      "value": "HopsinsMusicBot"
+      "value": "HOPSINS"
     },
     "ASSISTANT_NAME": {
       "description": "Your MusicPlayer assistant Telegram username without @.",

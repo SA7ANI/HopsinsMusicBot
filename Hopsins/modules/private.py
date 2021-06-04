@@ -28,19 +28,15 @@ logging.basicConfig(level=logging.INFO)
 )
 async def start_(client: Client, message: Message):
     await message.reply_text(
-        f"""<b>Hey my {message.from_user.first_name} is {PROJECT_NAME} \n
-I'm Bot Music Group, Which Can Play Songs in Group Voice Chat In Easy Way
-I Have Many Practical Features Like:
-┏━━━━━━━━━━━━━━
-• Playing Music.
-• Downloading Songs.
-• Search for the song you want to play or download.
-• Use Command » /help « to Find out My Full Features
-┗━━━━━━━━━━━━━━
-Managed With ❤ By {OWNER}
-━━━━━━━━━━━━━━━
-Want to Add Me to Your Group? Add Me To Your Group!
-</b>""",
+        f"""Hi {message.from_user.first_name}.\n
+{PROJECT_NAME} is a project designed for **play**,
+as simple as possible, **music** in your **groups**
+through the **voice chat** and download songs from **Youtube, Dezzer and Saavn**
+━━━━━━━━━━━━━━━━━━━━━━
+Hit /help to find more about how to use me to my full potential.
+━━━━━━━━━━━━━━━━━━━━━━
+Wanna Add me to your Group? Just click the button below!
+""",
 
 # Edit What You Need to Change
 # But don't delete it, thanks to ya :D
@@ -52,13 +48,10 @@ Want to Add Me to Your Group? Add Me To Your Group!
                         "➕ Add me to your group ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],
                 [
                     InlineKeyboardButton(
-                        "💬 Channel Updates", url=f"https://t.me/{UPDATES_CHANNEL}"), 
+                        "🛠 Source Code 🛠", url=f"https://{SOURCE_CODE}"), 
                     InlineKeyboardButton(
                         "⛑ Group Support", url=f"https://t.me/{SUPPORT_GROUP}")
-                ],[
-                    InlineKeyboardButton(
-                        "🛠 Source Code 🛠", url=f"https://{SOURCE_CODE}")
-                ]
+                ],
             ]
         ),
         reply_to_message_id=message.message_id
@@ -97,9 +90,8 @@ def map(pos):
         url = f"https://t.me/{SUPPORT_GROUP}"
         button = [
             [InlineKeyboardButton("➕ Add me to your group ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],
-            [InlineKeyboardButton(text = '💬 Channel Updates', url=f"https://t.me/{UPDATES_CHANNEL}"),
+            [InlineKeyboardButton(text = '🛠 Source Code 🛠', url=f"https://{SOURCE_CODE}"),
              InlineKeyboardButton(text = '⛑ Group Support', url=f"https://t.me/{SUPPORT_GROUP}")],
-            [InlineKeyboardButton(text = '🛠 Source Code 🛠', url=f"https://{SOURCE_CODE}")],
             [InlineKeyboardButton(text = '«', callback_data = f"help+{pos-1}")]
         ]
     else:
@@ -147,7 +139,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "📜 How to Use BOT 📜", url="https://t.me/TheKonoha11/20"
+                        "📜 How to Use BOT 📜", url="https://telegra.ph/HOPSINS-Music-Bot-05-30"
                     )
                 ]
             ]
