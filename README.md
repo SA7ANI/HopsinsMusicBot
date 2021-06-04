@@ -1,28 +1,33 @@
 <h1 align="centre">🎵 Hopsins Music Bot 🎵</h1>
 
-### A bot that can play music on telegram group's voice call
+### A bot that can play music on Telegram Group and Channel Voice Chats
+#### POWERED BY [PYTGCALLS](https://github.com/pytgcalls/pytgcalls)
+### Available on telegram as [@HopsinsMusicBot](https://t.me/HopsinsMusicBot)
 
-<h2> Whats new 🔥 </h2>
+<h2> Features 🔥 </h2>
 
 - Thumbnail Support
 - Playlist Support
 - Current playback support
 - Showing track names when skipping
 - Zero downtime, Fully Stable
-- DEEZER,YOUTUBE & SAAVN PLAYBACK SUPPORTED
+- Deezer,Youtube & Saavn playback support
 - Settings panel
 - Control with buttons
 - Userbot auto join
-- Channel Music Play
 
+## 🚀 Deployment
 
-### Commands 🛠
+### 💜 Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/SA7ANI/HopsinsMusicBot/tree/master)
+
+Get pyrogram (p)  `SESSION` from here:
+[![Run on Repl.it](https://repl.it/badge/github/SpEcHiDe/GenerateStringSession)](https://repl.it/@SA7ANI/StringSession?lite=1&outputonly=1)
+
+### Commands for Group 🛠
 #### For all in group
 
-- `/play <song name>` - play song you requested
-- `/play <reply to audio>` - play replied file
-- `/dplay <song name>` - play song you requested via deezer
-- `/splay <song name>` - play song you requested via jio saavn
 - `/playlist` - Show now playing list
 - `/current` - Show now playing
 - `/song <song name>` - download songs you want quickly
@@ -32,6 +37,10 @@
 - `/video <song name>` - download videos you want quickly
 
 #### Admins only.
+- `/play <song name>` - play song you requested
+- `/play <reply to audio>` - play replied file
+- `/dplay <song name>` - play song you requested via deezer
+- `/splay <song name>` - play song you requested via jio saavn
 - `/player` - open music player settings panel
 - `/pause` - pause song play
 - `/resume` - resume song play
@@ -41,22 +50,25 @@
 - `/userbotleave` - remove assistant from your chat
 - `/admincache` - Refresh admin list
 
-### Deploy To Heroku</h4>
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/SA7ANI/HopsinsMusicBot/tree/master)
-
-Get pyrogram string session [repl](https://repl.it/@SA7ANI/StringSession?lite=1&outputonly=1)
+#### Pmpermit
+- `.yes` - approove someone to pm you
+- `.no` - disapproove someone to pm you
++ Sudo Users can execute any command in any groups
 
 ### Credits
+Don't edit this part
+
 #### Special Credits
 - [Rojserbest](http://github.com/rojserbes): Callsmusic Developer
 
-This bot is based on the original work done by [Rojserbest](http://github.com/rojserbest). Without his hardwork daisyxmusic won't exist. 
-DaisyXmusic is a modified version of [Callsmusic](https://github.com/callsmusic/callsmusic) for fit the needs of @DaisyXbot users
+This bot is based on the original work done by [Rojserbest](http://github.com/rojserbest). Without his hardwork Music Man won't exist. 
+Music-Man is a modified version of [Callsmusic](https://github.com/callsmusic/callsmusic)
 
 #### Contribtors
 - [Risman](https://github.com/mrismanaziz)
 - [InukaASiTH](https://github.com/InukaAsith): Dev
+- [Rojserbest](http://github.com/rojserbes): Dev
 - [Wrench](https://github.com/EverythingSuckz/): Dev
 - [QueenArzoo](https://github.com/QueenArzoo): Dev
 - [lucifeermorningstar](https://github.com/lucifeermorningstar): Dev
@@ -66,3 +78,5 @@ DaisyXmusic is a modified version of [Callsmusic](https://github.com/callsmusic/
 - [ImJanindu](https://github.com/ImJanindu): 
 - [Laky](https://github.com/Laky-64) & [Andrew](https://github.com/AndrewLaneX): PyTgCalls
 - [Original Repo owners](https://github.com/suprojects/CallsMusic)
+
+Get pyrogram string session [repl](https://repl.it/@SA7ANI/StringSession?lite=1&outputonly=1)

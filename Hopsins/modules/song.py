@@ -35,6 +35,7 @@ from pyrogram.types import Message
 from youtube_search import YoutubeSearch
 from youtubesearchpython import SearchVideos
 
+from Hopsins.config import DURATION_LIMIT
 from Hopsins.modules.play import arq
 
 
@@ -66,16 +67,16 @@ def song(client, message):
         results[0]["views"]
 
     except Exception as e:
-        m.edit("❌ Song Not Found. \n\nTry Entering a Clearer Song Title.")
+        m.edit("❌ Song Not found.\n\nTry Entering a clearer song title.")
         print(str(e))
         return
-    m.edit("**Downloading Songs**")
+    m.edit("⬇️ **Downloading Songs**")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = "**🎵 Uploaded by @SA7ANI **"
+        rep = "**🎵 Uploaded by @TheKonoha11**"
         secmul, dur, dur_arr = 1, 0, duration.split(":")
         for i in range(len(dur_arr) - 1, -1, -1):
             dur += int(dur_arr[i]) * secmul
@@ -267,11 +268,11 @@ def time_to_seconds(time):
 async def jssong(_, message):
     global is_downloading
     if len(message.command) < 2:
-        await message.reply_text("/saavn input song title.")
+        await message.reply_text("/saavn enter song title.")
         return
     if is_downloading:
         await message.reply_text(
-            "Another download is in progress, please try again later"
+            "Another download in progress, try again later"
         )
         return
     is_downloading = True
@@ -306,11 +307,11 @@ async def jssong(_, message):
 async def deezsong(_, message):
     global is_downloading
     if len(message.command) < 2:
-        await message.reply_text("/deezer input song title")
+        await message.reply_text("/deezer enter song title")
         return
     if is_downloading:
         await message.reply_text(
-            "Another download is in progress, please try again later"
+            "Another download in progress, try again later"
         )
         return
     is_downloading = True
@@ -343,17 +344,17 @@ async def ytmusic(client, message: Message):
     global is_downloading
     if is_downloading:
         await message.reply_text(
-            "Another download is in progress, please try again later"
+            "Another download in progress, try again later"
         )
         return
 
     urlissed = get_text(message)
 
     pablo = await client.send_message(
-        message.chat.id, f"`Got {urlissed} From Youtube. Wait a minute.`"
+        message.chat.id, f"`Getting {urlissed} From Youtube. Wait a minute.`"
     )
     if not urlissed:
-        await pablo.edit("Invalid Command Syntax, Please type `/help` To Know More!")
+        await pablo.edit("Command Syntax Invalid, Please Type `/help` To Know More!")
         return
 
     search = SearchVideos(f"{urlissed}", offset=1, mode="dict", max_results=1)
@@ -385,9 +386,9 @@ async def ytmusic(client, message: Message):
             infoo = ytdl.extract_info(url, False)
             duration = round(infoo["duration"] / 60)
 
-            if duration > 8:
+            if duration > DURATION_LIMIT:
                 await pablo.edit(
-                    f"❌ Videos longer than 10 minutes are not allowed, videos that you want to download {duration} minute(s)"
+                    f"❌ Videos longer than {DURATION_LIMIT} minute(s) are not allowed, videos you want to download {duration} minute(s)"
                 )
                 is_downloading = False
                 return
@@ -400,7 +401,7 @@ async def ytmusic(client, message: Message):
 
     c_time = time.time()
     file_stark = f"{ytdl_data['id']}.mp4"
-    capy = f"**Nama Video ➠** `{thum}` \n**Requested For :** `{urlissed}` \n**Channel :** `{thums}` \n**Link :** `{mo}`"
+    capy = f"**Video Name➠** `{thum}` \n**Requested For :** `{urlissed}` \n**Channel :** `{thums}` \n**Link :** `{mo}`"
     await client.send_video(
         message.chat.id,
         video=open(file_stark, "rb"),
@@ -413,7 +414,7 @@ async def ytmusic(client, message: Message):
         progress_args=(
             pablo,
             c_time,
-            f"`Uploading {urlissed} Song From YouTube Music!`",
+            f"`Uploading {urlissed} Songs From YouTube Music!`",
             file_stark,
         ),
     )

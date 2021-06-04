@@ -17,10 +17,10 @@
 
 from pyrogram import Client, filters
 from pyrogram.errors import UserAlreadyParticipant
-
+import asyncio
 from Hopsins.helpers.decorators import authorized_users_only, errors
 from Hopsins.services.callsmusic.callsmusic import client as USER
-
+from Hopsins.config import SUDO_USERS
 
 @Client.on_message(filters.command(["userbotjoin"]) & ~filters.private & ~filters.bot)
 @authorized_users_only
@@ -42,30 +42,91 @@ async def addchannel(client, message):
 
     try:
         await USER.join_chat(invitelink)
-        await USER.send_message(message.chat.id, "I joined here as you requested")
     except UserAlreadyParticipant:
         await message.reply_text(
-            "<b>Assistant Bot is already in your chat</b>",
+            f"<b>{user.first_name} already in your chat</b>",
         )
     except Exception as e:
         print(e)
         await message.reply_text(
-            f"<b>⛑ Flood Wait Error ⛑ \n{user.first_name} cannot join your group due to the number of requests to join userbot! Make sure the user is not banned in the group."
-            "\n\nOr add Assistant Bot manually to your Groups and try again.</b>",
+            f"<b>⛑ Flood Wait Error ⛑\n{user.first_name} can't join your group due to many join requests for userbot! Make sure the user is not banned in the group."
+            "\n\nOr add Assistant bot manually to your Group and try again.</b>",
         )
         return
     await message.reply_text(
-        "<b>Userbot helper joins your chat</b>",
-        )
+        f"<b>{user.first_name} successfully joined your chat</b>",
+    )
 
 
 @USER.on_message(filters.group & filters.command(["userbotleave"]))
+@authorized_users_only
 async def rem(USER, message):
     try:
         await USER.leave_chat(message.chat.id)
     except:
         await message.reply_text(
             f"<b>Users cannot leave your group! Probably waiting for the floodwaits."
-            "\n\nOr manually remove me from your Groups</b>",
+            "\n\nOr manually remove me from your Group</b>",
         )
         return
+
+@Client.on_message(filters.command(["userbotleaveall"]))
+async def bye(client, message):
+    if message.from_user.id in SUDO_USERS:
+        left=0
+        failed=0
+        await message.reply("**Assistant Leave all chats**")
+        for dialog in USER.iter_dialogs():
+            try:
+                await USER.leave_chat(dialog.chat.id)
+                left = left+1
+                await lol.edit(f"Assistant leaving... Left: {left} chats. Failed: {failed} chats.")
+            except:
+                failed=failed+1
+                await lol.edit(f"Assistant leaving... Left: {left} chats. Failed: {failed} chats.")
+            await asyncio.sleep(0.7)
+        await client.send_message(message.chat.id, f"Left {left} chats. Failed {failed} chats.")
+
+
+@Client.on_message(filters.command(["userbotjoinchannel","ubjoinc"]) & ~filters.private & ~filters.bot)
+@authorized_users_only
+@errors
+async def addcchannel(client, message):
+    try:
+      conchat = await client.get_chat(message.chat.id)
+      conid = conchat.linked_chat.id
+      chid = conid
+    except:
+      await message.reply("Is the chat connected?")
+      return    
+    chat_id = chid
+    try:
+        invitelink = await client.export_chat_invite_link(chid)
+    except:
+        await message.reply_text(
+            "<b>Add me as your channel admin first</b>",
+        )
+        return
+
+    try:
+        user = await USER.get_me()
+    except:
+        user.first_name = "Hopsins"
+
+    try:
+        await USER.join_chat(invitelink)
+    except UserAlreadyParticipant:
+        await message.reply_text(
+            f"<b>{user.first_name} already on your channel</b>",
+        )
+        return
+    except Exception as e:
+        print(e)
+        await message.reply_text(
+            f"<b>⛑ Flood Wait Error ⛑\n{user.first_name} can't join your group due to many join requests for userbot! Make sure the user is not banned in the group."
+            "\n\nOr add Assistant bot manually to your Group and try again.</b>",
+        )
+        return
+    await message.reply_text(
+        f"<b>{user.first_name} already joined your chat</b>",
+    )

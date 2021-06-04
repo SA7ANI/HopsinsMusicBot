@@ -1,43 +1,75 @@
 {
-  "name": "HopsinsMusicBot",
+  "name": "Hopsins Music Bot",
   "description": "Open-Source bot to play songs in your Telegram's Group Voice Chat. Powered by PyTgCalls.",
   "keywords": ["music", "voicechat", "telegram"],
-  "repository": "https://github.com/SA7ANI/HopsinsMusicBot",
+  "repository": "https://github.com//SA7ANI/HopsinsMusicBot",
   "stack": "container",
   "env": {
     "SESSION_NAME": {
-      "description": "Enter the String Session Program for the assistant who goes to VCG",
+      "description": "Enter String Session Pyrogram (P) for assistants that go up to VCG",
       "required": true
     },
     "BOT_TOKEN": {
-      "description": "Enter the Bot Token from @BotFather",
+      "description": "Enter Bot Token from @BotFather",
+      "required": true
+    },
+    "BOT_USERNAME": {
+      "description": "Your bot username without @",
       "required": true
     },
     "BOT_NAME": {
-      "description": "Enter your MusicPlayer bot name. (free content)",
+      "description": "The name of your MusicPlayer Bot.",
       "required": false,
       "value": ""
+    },
+    "SUPPORT_GROUP": {
+      "description": "Your MusicPlayer support group without @ [skip this if you don't have one]",
+      "required": false,
+      "value": "TheKonoha11"
+    },
+    "UPDATES_CHANNEL": {
+      "description": "Updates Channel without @ [skip this if you don't have it]",
+      "required": false,
+      "value": ""
+    }, 
+    "PROJECT_NAME": {
+      "description": "The name of your MusicPlayer project.",
+      "required": false,
+      "value": "HopsinsMusicBot"
+    },
+    "ASSISTANT_NAME": {
+      "description": "Your MusicPlayer assistant Telegram username without @.",
+      "required": true
+    },
+    "OWNER": {
+      "description": "Enter Telegram Name or Username",
+      "required": true
+	  "value": "SA7ANI"
     },
     "ARQ_API_KEY": {
-      "description": "Take fire from the telegram boat »t.me/ARQRobot or @ARQRobot",
-      "required": false,
-      "value": ""
+      "description": "Take fire from the telegram boat » t.me/ARQRobot or @ARQRobot",
+      "required": true
     },    
     "BG_IMAGE": {
-      "description": "Custom Background Play Music Use Transparent Photos in .png format",
+      "description": "Custom Background Play Music Using Transparent Photo .png / .jpg format",
       "required": false,
-      "value": "https://telegra.ph/file/cd0b87484429704c7b935.png"
-    },       
+      "value": "https://telegra.ph/file/2656e87b6f8d1b004c504.png"
+    },        
     "API_ID": {
-      "description": "Enter the APP ID. Please retrieve it from my.telegram.org/apps",
+      "description": "Enter APP ID Please Download from my.telegram.org/apps or t.me/scrapmanbot",
       "required": true
-    },
+    },   
     "API_HASH": {
-      "description": "Enter the HASH API Please Get it from my.telegram.org/apps",
+      "description": "Input HASH API Please Download from my.telegram.org/apps or t.me/scrapmanbot",
       "required": true
     },
+    "PMPERMIT": {
+      "description": "Change to turn off PMPERMIT",
+      "required": false,
+      "value": "ENABLE"
+    }, 
     "SUDO_USERS": {
-      "description": "List of User ID users counted as admin all over the place (separator using space).",
+      "description": "List of Telegram User ID users are counted as admins everywhere (separate using space)",
       "required": true
     },
     "DURATION_LIMIT": {
