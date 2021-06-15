@@ -172,7 +172,8 @@ async def p_cb(b, cb):
       lel = await client.get_chat(cb.message.chat.id)
       lol = lel.linked_chat.id
       conv = lel.linked_chat
-    except:  
+    except:
+      return
     que.get(lol)
     type_ = cb.matches[0].group(1)
     cb.message.chat.id
