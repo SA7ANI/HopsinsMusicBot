@@ -2,12 +2,13 @@
   "name": "Hopsins Music Bot",
   "description": "Open-Source bot to play songs in your Telegram's Group Voice Chat. Powered by PyTgCalls.",
   "keywords": ["music", "voicechat", "telegram"],
-  "repository": "https://github.com//SA7ANI/HopsinsMusicBot",
+  "repository": "https://github.com/SA7ANI/HopsinsMusicBot",
   "stack": "container",
   "buildpacks": [
    {
      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-   }
+   }   
+  ], 
   "env": {
     "SESSION_NAME": {
       "description": "Enter String Session Pyrogram (P) for assistants that go up to VCG",
@@ -22,7 +23,7 @@
       "required": true
     },
     "BOT_NAME": {
-      "description": "The name of your MusicPlayer Bot.",
+      "description": "Your MusicPlayer Bot Name.",
       "required": false,
       "value": ""
     },
@@ -39,7 +40,7 @@
     "PROJECT_NAME": {
       "description": "The name of your MusicPlayer project.",
       "required": false,
-      "value": "HOPSINS"
+      "value": "HopsinsMusicBot"
     },
     "ASSISTANT_NAME": {
       "description": "Your MusicPlayer assistant Telegram username without @.",
@@ -48,10 +49,9 @@
     "OWNER": {
       "description": "Enter Telegram Name or Username",
       "required": true
-	  "value": "SA7ANI"
     },
     "ARQ_API_KEY": {
-      "description": "Take fire from the telegram boat » t.me/ARQRobot or @ARQRobot",
+      "description": "Take fire from the telegram boat »t.me/ARQRobot or @ARQRobot",
       "required": true
     },    
     "BG_IMAGE": {
