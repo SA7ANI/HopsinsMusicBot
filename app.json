@@ -4,6 +4,10 @@
   "keywords": ["music", "voicechat", "telegram"],
   "repository": "https://github.com//SA7ANI/HopsinsMusicBot",
   "stack": "container",
+  "buildpacks": [
+   {
+     "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+   }
   "env": {
     "SESSION_NAME": {
       "description": "Enter String Session Pyrogram (P) for assistants that go up to VCG",

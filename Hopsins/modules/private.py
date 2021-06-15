@@ -82,26 +82,43 @@ def help_answer(client, callback_query):
 
 
 def map(pos):
-    if(pos==1):
-        button = [
+    if (pos==1):
+        return [
             [InlineKeyboardButton(text = 'Next »', callback_data = "help+2")]
         ]
-    elif(pos==len(tr.HELP_MSG)-1):
+    elif pos==len(tr.HELP_MSG)-1:
         url = f"https://t.me/{SUPPORT_GROUP}"
-        button = [
-            [InlineKeyboardButton("➕ Add me to your group ➕", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],
-            [InlineKeyboardButton(text = '🛠 Source Code 🛠', url=f"https://{SOURCE_CODE}"),
-             InlineKeyboardButton(text = '⛑ Group Support', url=f"https://t.me/{SUPPORT_GROUP}")],
-            [InlineKeyboardButton(text = '«', callback_data = f"help+{pos-1}")]
+        return [
+            [
+                InlineKeyboardButton(
+                    "➕ Add me to your Group ➕",
+                    url=f"https://t.me/{BOT_USERNAME}?startgroup=true",
+                )
+            ],
+            [
+                InlineKeyboardButton(
+                    text='💬 Channel Updates',
+                    url=f"https://t.me/{UPDATES_CHANNEL}",
+                ),
+                InlineKeyboardButton(
+                    text='⛑ Group Support', url=f"https://t.me/{SUPPORT_GROUP}"
+                ),
+            ],
+            [
+                InlineKeyboardButton(
+                    text='🛠 Source Code 🛠', url=f"https://{SOURCE_CODE}"
+                )
+            ],
+            [InlineKeyboardButton(text='«', callback_data=f"help+{pos-1}")],
         ]
+
     else:
-        button = [
+        return [
             [
                 InlineKeyboardButton(text = '«', callback_data = f"help+{pos-1}"),
                 InlineKeyboardButton(text = '»', callback_data = f"help+{pos+1}")
             ],
         ]
-    return button
 
 
 @Client.on_message(
